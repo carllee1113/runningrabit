@@ -1,0 +1,142 @@
+Here is a Product Requirements Document (PRD) and high-level user workflow for your app, **RunningRabi**, based on the 20 pain points you've identified.
+
+This document is built on the core premise that RunningRabi’s unique value proposition is the **live, two-way connection between an athlete and their coach**, built on a foundation of reliable navigation and user-controlled privacy.
+
+---
+
+## Product Requirements Document (PRD): RunningRabi
+
+### 1. Introduction & Vision
+
+* **Product:** RunningRabi
+* **Vision:** To be the first running platform that truly closes the loop between athletes and coaches. We replace rigid, pre-recorded plans with real-time, adaptive feedback and guidance, all built on a reliable and private technical foundation.
+* **Value Proposition:** Stop running with a script. Start running with a coach.
+
+### 2. Target Audience & Personas
+
+1.  **The Coached Athlete:** A runner (of any level) who works with a professional running coach. They are currently frustrated by the broken system of spreadsheets, text messages, and multiple apps (e.g., Strava for logging, WhatsApp for feedback) to manage their training.
+2.  **The Dedicated Coach:** A professional coach managing a roster of athletes. They lack the tools to get live performance data and provide in-the-moment feedback, relying instead on post-run data and manual analysis.
+3.  **The Ambitious Runner:** A runner without a formal coach who is training for a goal (e.g., first marathon). They are frustrated by the technical failures (bad GPS, app crashes) and rigid, non-adaptive plans of apps like Nike Run Club and the privacy issues of Strava.
+
+### 3. Core Features (Mapped to Pain Points)
+
+The feature set is designed to directly solve the 20 pain points identified.
+
+#### A. The "Live Coach" Connection (Solves #9, #10, #11, #12, #19)
+This is the app's "killer feature."
+
+* **Live Run Monitoring (Coach View):** On the mobile app, a coach can "spectate" a connected athlete's run in real-time. They will see the athlete's location on a map, live pace, heart rate, and current workout step.
+* **Real-Time Audio Feedback:** A "push-to-talk" audio channel. The coach can tap a button on their mobile app to give live, one-way audio feedback to the athlete's headphones (e.g., "Great job, hold this pace," or "Ease up on this hill, you're 10s too fast").
+* **Adaptive Training Plan:** A coach can see live data and *adjust* a workout *mid-run*.
+    * *Example:* If an athlete is struggling, the coach can manually push a "Skip Interval" or "Reduce intensity" command to the athlete's watch, solving the rigid plan issue (**#19**).
+* **Granular Post-Run Portal:** A dedicated portal for coaches to see detailed performance analytics (pace variability, HR drift, completion scores) (**#11**) and leave targeted text, audio, or video feedback (**#12**).
+
+#### B. Intelligent Navigation & Routing (Solves #1, #2, #3, #4)
+Navigation must be reliable, not frustrating.
+
+* **High-Fidelity "Off-Route" Logic:**
+    * Instead of a simple GPS point, the app will use a wider "geofenced corridor" around the planned route, especially on roads. This eliminates false "off-route" alerts when a runner is simply on the other side of the street (**#1**).
+* **Smart Re-routing Engine:**
+    * If a user *truly* goes off-route, the app will not just beep. It will intelligently recalculate the *fastest path back to the original route* (not to the start) and provide new voice guidance (**#4**).
+* **Stable Voice Guidance:**
+    * The voice navigation engine will run as a high-priority background service to prevent it from being "killed" by the OS, ensuring it doesn't drop mid-run (**#3**).
+* **Route Creation v2.0:**
+    * A web or mobile route builder with a more precise "snap-to-road" algorithm that allows manual adjustments to fix intersection errors (**#2**).
+
+#### C. Privacy-First Data & Sharing (Solves #13, #14, #15, #16, #17, #18)
+Data is controlled by the user, not the platform.
+
+* **"Coach Connect" Sharing Model:**
+    * All run data is **private by default**. The *only* way to share data is by sending a unique, secure invite to a specific coach or friend. There are no public, global leaderboards or activity feeds (**#16**).
+    * This eliminates public heatmap security risks (**#17**).
+* **No Address Book Scraping:**
+    * The app will **never** access a user's address book without explicit, case-by-case permission (**#18**).
+* **Clear Route Library:**
+    * A simple, two-tab library in the mobile app: "My Private Routes" and "Shared With Me" (from a coach or friend). This provides clear organization (**#14**).
+* **Simple GPX/Route Sharing:**
+    * A clear "Share" button on any route that allows sending a private link or file to a connected coach/friend (**#13**).
+* **Open Data Sync:**
+    * Prioritize seamless sync *from* major platforms like Garmin Connect and Coros. Users own their data and can use their preferred device, then sync to RunningRabi for coaching analysis (**#15**).
+
+#### D. Technical Performance & UX (Solves #5, #6, #7, #8, #20)
+
+* **Robust Watch-Phone Sync:**
+    * Data sync between the watch and phone will be treated as a critical process. Runs saved on the watch are queued in a high-priority "sync pending" state until the phone app confirms receipt, eliminating lost data (**#7**).
+* **GPS Data Prioritization:**
+    * Allow users to select their "Source of Truth" for GPS (e.g., "Use Watch GPS" or "Use Phone GPS") to resolve distance mismatches (**#5**).
+* **Stable UI & Caching:**
+    * Routes and workouts assigned by a coach are pre-cached on the device to prevent "route won't load" errors at the start of a run (**#8**). The app will be built for high stability to prevent frequent crashes (**#6**).
+* **Smart Search & Filtering:**
+    * A dedicated "Workouts" tab with granular filters for finding guided runs or assigned coach workouts: filter by **Type** (Tempo, Recovery), **Duration**, **Distance**, and **Status** (Scheduled, Completed) (**#20**).
+
+### 4. Platform-Specific Breakdown
+
+#### 1. Mobile App (iOS & Android) - "The Hub"
+This is the primary interface for planning, analysis, and coaching.
+
+* **Athlete View:**
+    * Training calendar (viewing coach's plan)
+    * Detailed post-run analysis & coach feedback inbox
+    * Route creation and management library
+    * Privacy & connection settings
+* **Coach View (Special Mode):**
+    * Athlete roster dashboard
+    * **Live Run Monitor** (to "spectate" athletes)
+    * **Live Audio "Push-to-Talk"** button
+    * Workout builder and calendar planner
+    * Post-run feedback and analysis tools
+
+#### 2. Watch App (watchOS, Wear OS) - "The In-Run Experience"
+This is the primary tool for the athlete *during* the run.
+
+* **Main Display:**
+    * Clear, high-contrast metrics (Pace, HR, Distance)
+    * Current workout step (e.g., "Tempo: 10 min @ 7:30/mi")
+* **Navigation:**
+    * Visual turn-by-turn arrows
+    * Haptic feedback for turns (e.g., buzz-buzz for right, buzz for left)
+* **Coaching Interface:**
+    * Receives live audio from the coach
+    * Haptic/visual alert when the coach provides an update or feedback
+    * Receives live workout adjustments (e.g., "Workout step skipped")
+* **Offline Reliability:**
+    * Must be able to start, complete, and save a full run (including GPS) *without* a phone present. Data syncs reliably once the connection is re-established (**#7**).
+
+---
+
+## User Workflow: "My First Coached Run"
+
+This workflow demonstrates the "magic moment" of RunningRabi, combining planning, live coaching, and smart navigation.
+
+1.  **Phase 1: Setup & Planning (Mobile App)**
+    * **Athlete:** Downloads RunningRabi, signs up, and selects "I am an Athlete." The app generates a unique, private "Coach Connect Code."
+    * **Athlete:** Sends this code to their coach.
+    * **Coach:** Downloads RunningRabi, selects "I am a Coach." Goes to "My Roster" -> "Add Athlete" and enters the code. They are now securely linked.
+    * **Coach:** Opens the calendar for the athlete and assigns a workout for tomorrow: "Tempo Run" with a specific GPX route attached.
+    * **Athlete:** Receives a notification. They open the app, see the workout, and tap "Load Route to Watch." The route and workout are cached for reliability (**Solves #8**).
+
+2.  **Phase 2: The Run (Watch App & Coach Mobile App)**
+    * **Athlete (Watch):** Heads outside, opens the RunningRabi watch app. Taps the "Tempo Run" workout.
+    * **Athlete (Watch):** Taps "Start." The run begins. Voice guidance for the route starts (**Solves #3**).
+    * **Coach (Mobile):** Receives a push notification: "Alex's Tempo Run has started."
+    * **Coach (Mobile):** Taps the notification to open the **Live Run Monitor**. They see Alex's icon moving on the route map, with live pace and HR data.
+    * **Athlete (Watch):** Misses a turn while avoiding a obstacle.
+    * **Old App (Pain Point #1, #4):** *BEEP! BEEP! OFF ROUTE!*
+    * **RunningRabi (Solution #C):** The app waits 2 seconds, sees the athlete is still moving away from the "route corridor." The watch gives a gentle haptic. Voice: *"Missed turn. In 100 feet, turn left to rejoin route."*
+    * **Coach (Mobile):** The coach *also* sees the deviation. They tap the "Push-to-Talk" button.
+    * **Coach (Audio):** "Hey Alex, you just missed that turn. Take the next left at the stop sign, and it will put you right back on track. No need to backtrack."
+    * **Athlete (Headphones):** Hears the coach's voice, feels reassured, and follows the instruction.
+    * **Coach (Mobile):** Later in the run, the coach sees the athlete's HR drifting too high for the tempo pace.
+    * **Coach (Audio):** "Your heart rate is climbing. Let's cut this last interval short. I'm adjusting the workout now."
+    * **Coach (Mobile):** Taps "End Interval" on their phone.
+    * **Athlete (Watch):** The watch face updates instantly: "Cooldown: 5 min." (**Solves #10, #19**)
+
+3.  **Phase 3: Post-Run & Feedback (Mobile App)**
+    * **Athlete (Watch):** Finishes the run and hits "Save." The run syncs reliably to the phone (**Solves #7**).
+    * **Coach (Mobile):** Reviews the completed run data—observing the pace variability and HR response (**Solves #11**).
+    * **Coach (Mobile):** Goes to the "Feedback" tab for that run and records a 30-second voice note: "Great work today. You handled that missed turn perfectly, and I liked how you recovered. Good call on my part to cut that last interval, you were working hard. Let's focus on recovery tomorrow." (**Solves #12**).
+    * **Athlete (Mobile):** Opens the app later, sees the completed run, and listens to the personalized, specific feedback from their coach.
+
+---
+
+Would you like to drill down into the technical specifications for the "Live Run Monitor" or map out the wireframes for the watch app's navigation interface?

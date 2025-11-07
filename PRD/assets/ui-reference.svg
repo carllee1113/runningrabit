@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6a88"/>
+      <stop offset="100%" stop-color="#ff99ac"/>
+    </linearGradient>
+    <linearGradient id="button" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1200" height="480" fill="#f3f4f6"/>
+  <!-- Left phone mock -->
+  <g transform="translate(40,30)">
+    <rect rx="40" ry="40" width="240" height="420" fill="#1f2937"/>
+    <rect x="12" y="10" rx="30" ry="30" width="216" height="400" fill="url(#grad)"/>
+    <text x="120" y="70" font-size="22" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui">FITNESS APP</text>
+    <circle cx="120" cy="150" r="55" fill="#fff" opacity="0.85"/>
+    <!-- Runner glyph -->
+    <path d="M110 130 l20 0 l-12 18 l20 6 l-18 20 l-22 -8 l10 -16 l-10 -20 z" fill="#ff6a88" opacity="0.85"/>
+    <rect x="60" y="300" rx="10" ry="10" width="120" height="36" fill="url(#button)"/>
+    <text x="120" y="324" font-size="14" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui">GET STARTED</text>
+  </g>
+  <!-- Grid of UI tiles (reference layout) -->
+  <g transform="translate(320,30)">
+    <!-- 12 cards -->
+    <defs>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>
+      </filter>
+    </defs>
+    
+    <!-- Draw a 4x3 grid -->
+    <!-- Card function-like repetition inline -->
+    <!-- Row 1 -->
+    <g transform="translate(0,0)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <rect x="0" y="0" width="160" height="52" rx="16" fill="url(#grad)"/>
+      <text x="80" y="30" font-size="14" text-anchor="middle" fill="#ffffff" font-family="Inter">Sign Up</text>
+    </g>
+    <g transform="translate(180,0)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <rect x="0" y="0" width="160" height="52" rx="16" fill="url(#grad)"/>
+      <text x="80" y="30" font-size="14" text-anchor="middle" fill="#ffffff" font-family="Inter">Profile</text>
+    </g>
+    <g transform="translate(360,0)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <rect x="0" y="0" width="160" height="52" rx="16" fill="url(#grad)"/>
+      <text x="80" y="30" font-size="14" text-anchor="middle" fill="#ffffff" font-family="Inter">Stats</text>
+    </g>
+    <g transform="translate(540,0)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <rect x="0" y="0" width="160" height="52" rx="16" fill="url(#grad)"/>
+      <text x="80" y="30" font-size="14" text-anchor="middle" fill="#ffffff" font-family="Inter">Activities</text>
+    </g>
+    <!-- Row 2 -->
+    <g transform="translate(0,140)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="20" y="40" font-size="12" fill="#4b5563" font-family="Inter">Route Map</text>
+      <polyline points="10,90 40,70 70,95 100,60 140,80" fill="none" stroke="#ef4444" stroke-width="3"/>
+    </g>
+    <g transform="translate(180,140)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="20" y="40" font-size="12" fill="#4b5563" font-family="Inter">Calories</text>
+      <rect x="20" y="70" width="120" height="20" rx="4" fill="#fca5a5"/>
+    </g>
+    <g transform="translate(360,140)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="20" y="40" font-size="12" fill="#4b5563" font-family="Inter">Calendar</text>
+      <rect x="20" y="60" width="120" height="50" rx="8" fill="#fde68a"/>
+    </g>
+    <g transform="translate(540,140)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="20" y="40" font-size="12" fill="#4b5563" font-family="Inter">Chart</text>
+      <path d="M20,100 C50,60 90,80 140,70" stroke="#3b82f6" stroke-width="3" fill="none"/>
+    </g>
+    <!-- Row 3 -->
+    <g transform="translate(0,280)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="80" y="30" font-size="12" text-anchor="middle" fill="#4b5563" font-family="Inter">Routes</text>
+      <rect x="30" y="80" width="100" height="28" rx="8" fill="#e5e7eb"/>
+    </g>
+    <g transform="translate(180,280)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="80" y="30" font-size="12" text-anchor="middle" fill="#4b5563" font-family="Inter">Share</text>
+      <rect x="30" y="80" width="100" height="28" rx="8" fill="#60a5fa"/>
+    </g>
+    <g transform="translate(360,280)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="80" y="30" font-size="12" text-anchor="middle" fill="#4b5563" font-family="Inter">Settings</text>
+      <rect x="30" y="80" width="100" height="28" rx="8" fill="#d1d5db"/>
+    </g>
+    <g transform="translate(540,280)">
+      <rect width="160" height="120" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+      <text x="80" y="30" font-size="12" text-anchor="middle" fill="#4b5563" font-family="Inter">Feedback</text>
+      <rect x="30" y="80" width="100" height="28" rx="8" fill="#fca5a5"/>
+    </g>
+  </g>
+  <text x="600" y="460" font-size="12" text-anchor="middle" fill="#6b7280" font-family="Inter">UI reference mock (gradient theme, mobile-first). For internal design only.</text>
+</svg>
