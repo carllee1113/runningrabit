@@ -126,3 +126,42 @@ Status legend: `[ ]` not started, `[x]` completed (add timestamp in notes)
 ## 9. Documentation & Governance
 - [ ] Maintain this checklist; update only with approved changes
 - [ ] Timestamp completions and link to evidence/PRs
+
+## 10. Health Integrations (Approved Plan)
+Status legend: `[ ]` not started, `[x]` completed (add timestamp in notes)
+
+### 10.1 Strava (Web-first) — Start Here
+- [ ] Register Strava API application; obtain `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`, `REDIRECT_URI` (notes: use Vercel or local dev URL)
+- [ ] Server endpoint to redirect to Strava OAuth (`/api/strava/auth`) with CSRF-resistant `state`
+- [ ] Server callback to exchange `code` for access/refresh tokens (`/api/strava/callback`) with error handling
+- [ ] Secure storage of Strava tokens per user (Supabase table with RLS: owner-only)
+- [ ] Background refresh of tokens before expiry; handle revocation
+- [ ] Fetch activities (last 90 days): distance, time, elevation, start_date, sport_type
+- [ ] Store minimal metrics (daily/weekly aggregates) for graphs on Home
+- [ ] Home page UI: “Connect Strava” button and Activity Overview graphs
+- [ ] Unit/integration tests for OAuth flow and token storage
+- [ ] Privacy doc update: scope, revocation, data minimization
+
+### 10.2 Apple HealthKit (iOS)
+- [ ] Create native iOS companion app (Swift/SwiftUI) to read HealthKit (HKWorkout, HKQuantity types: distance, heartRate)
+- [ ] Request permissions with clear explanations; respect “only necessary” data collection
+- [ ] Background sync design: queue metrics post-run; reliable retry with exponential backoff
+- [ ] Serialize and upload metrics to web backend (Supabase REST/RPC) using signed requests
+- [ ] Supabase schema: `health_metrics` (user_id, source, date, distance_m, avg_hr_bpm, calories_kcal, metadata)
+- [ ] RLS policies: owner-only write/read; no cross-user access
+- [ ] Security: avoid storing raw PII beyond necessary metrics; hash device IDs if used
+- [ ] Tests: permission denied, no data, large datasets, retry logic
+- [ ] Documentation: setup guide, permission strings, privacy policy alignment
+
+### 10.3 Android Health Connect
+- [ ] Create native Android app (Kotlin/Jetpack Compose) using Health Connect API
+- [ ] Request permissions for workouts and metrics similar to HealthKit
+- [ ] Background sync pipeline mirroring iOS: robust retries and failure logging
+- [ ] Upload serialized metrics to Supabase; shared schema `health_metrics`
+- [ ] RLS and security parity with iOS; validate unauthorized access is blocked
+- [ ] Tests: permission revoked, missing providers (Garmin/Coros), large batch uploads
+- [ ] Documentation: device compatibility, permissions, privacy commitments
+
+Notes:
+- Start with Strava integration on web for fastest path to graphs.
+- HealthKit/Health Connect require native apps; this document outlines approved steps before development.
