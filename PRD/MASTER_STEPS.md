@@ -29,9 +29,9 @@ Status legend: `[ ]` not started, `[x]` completed (add timestamp in notes)
 - [ ] Settings: basic privacy and connection controls
 
 ### Backend & Data (MVP)
-- [ ] Supabase schema: `routes`, `route_shares`, storage bucket for GPX
-- [ ] RLS: owner-only read/write; shared recipients read-only
-- [ ] API/RPC: create share, revoke share, list shares
+- [x] Supabase schema: `routes`, `route_shares`, storage bucket for GPX — completed 2025-11-08 (evidence: `supabase/migrations/20251108_routes_shares_storage.sql`)
+- [x] RLS: owner-only read/write; shared recipients read-only — completed 2025-11-08 (evidence: `supabase/migrations/20251108_routes_shares_storage.sql`)
+- [x] API/RPC: create share, revoke share, list shares — completed 2025-11-08 (evidence: `supabase/migrations/20251108_routes_shares_storage.sql`)
 - [ ] GPX parsing service with safe deserialization (no unsafe libraries)
 
 ### Security & Tests (MVP)
@@ -44,7 +44,7 @@ Status legend: `[ ]` not started, `[x]` completed (add timestamp in notes)
 
 ### Documentation & Ops (MVP)
 - [ ] README usage: import GPX, view, share, revoke
-- [ ] CHANGELOG entry under Unreleased for MVP features
+- [x] CHANGELOG entry under Unreleased for MVP features — completed 2025-11-08 (Supabase cloud-first GPX save with local fallback; HR/Pace chart interactions)
 - [x] Master steps timestamps on completion with evidence links — updated 2025-11-07
 - [x] Document Hong Kong open data sources, URLs, licenses, and attribution — completed 2025-11-07 (evidence: `PRD/EXTERNAL_SERVICES.md`)
 
