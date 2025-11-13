@@ -131,14 +131,14 @@ Status legend: `[ ]` not started, `[x]` completed (add timestamp in notes)
 Status legend: `[ ]` not started, `[x]` completed (add timestamp in notes)
 
 ### 10.1 Strava (Web-first) — Start Here
-- [ ] Register Strava API application; obtain `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`, `REDIRECT_URI` (notes: use Vercel or local dev URL)
-- [ ] Server endpoint to redirect to Strava OAuth (`/api/strava/auth`) with CSRF-resistant `state`
-- [ ] Server callback to exchange `code` for access/refresh tokens (`/api/strava/callback`) with error handling
+- [x] Register Strava API application; obtain `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`, `REDIRECT_URI` — completed 2025-11-12 (evidence: `web/.env.local`)
+- [x] Server endpoint to redirect to Strava OAuth (`/api/strava/auth`) with CSRF-resistant `state` — completed 2025-11-12 (evidence: `web/src/app/api/strava/auth/route.ts`)
+- [x] Server callback to exchange `code` for access/refresh tokens (`/api/strava/callback`) with error handling — completed 2025-11-12 (evidence: `web/src/app/api/strava/callback/route.ts`)
 - [ ] Secure storage of Strava tokens per user (Supabase table with RLS: owner-only)
 - [ ] Background refresh of tokens before expiry; handle revocation
 - [ ] Fetch activities (last 90 days): distance, time, elevation, start_date, sport_type
 - [ ] Store minimal metrics (daily/weekly aggregates) for graphs on Home
-- [ ] Home page UI: “Connect Strava” button and Activity Overview graphs
+- [x] Home page UI: “Connect Strava” button and Activity Overview graphs — completed 2025-11-12 (evidence: `web/src/components/strava-section.tsx`, `web/src/components/strava-activity-widget.tsx`, `web/src/components/strava-data-explorer.tsx`)
 - [ ] Unit/integration tests for OAuth flow and token storage
 - [ ] Privacy doc update: scope, revocation, data minimization
 

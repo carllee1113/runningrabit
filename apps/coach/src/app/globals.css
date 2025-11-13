@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force light mode and ensure text visibility */
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Ensure all text elements have good contrast */
+.text-gray-900 {
+  color: #111827 !important;
+}
+
+.text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.text-gray-700 {
+  color: #374151 !important;
+}
+
+.text-gray-600 {
+  color: #4b5563 !important;
+}
+
+.text-gray-500 {
+  color: #6b7280 !important;
+}
+
+/* Ensure buttons and interactive elements are visible */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+.bg-gray-200 {
+  background-color: #e5e7eb !important;
+}
+
+/* Override any potential dark mode styles */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light !important;
+  }
+  
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+}
+
+/* Ensure all headings and text have proper contrast */
+h1, h2, h3, h4, h5, h6 {
+  color: #000000 !important;
+}
+
+p, span, div {
+  color: #000000 !important;
+}
+
+/* Ensure form elements are visible */
+input, textarea, select {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #d1d5db !important;
+}
+
+/* Ensure links are visible */
+a {
+  color: #2563eb !important;
+}
+
+a:hover {
+  color: #1d4ed8 !important;
+}

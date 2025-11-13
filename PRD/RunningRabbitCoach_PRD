@@ -1,0 +1,108 @@
+# Product Requirements Document (PRD): RunningRabbit Coach
+
+## 1. Introduction & Vision
+* Product: RunningRabbit Coach (domain: runningrabbit.coach)
+* Vision: Provide coaches a focused workspace to connect with athletes, share training, and deliver timely feedback, complementing the athlete-facing RunningRabbit app.
+* Primary Aim: Coaching service for RunningRabbit users — connect, invite, plan workouts, and track progress.
+
+## 2. Personas
+* The Coach: Manages a roster of athletes; needs planning, monitoring, and feedback tools.
+* The Coached Athlete (counterpart): Receives training plans and feedback; authorizes a coach connection.
+
+## 3. MVP Features
+### 3.1 Connection & Invitation
+* Coach invites a RunningRabbit user to connect.
+* Athlete accepts or declines; can revoke at any time.
+* Statuses: pending, active, revoked.
+
+### 3.2 Feedback to Athletes
+* Post‑run feedback: text notes and optional audio snippets linked to a specific activity or day.
+* Deliver via in‑app notifications to the athlete in RunningRabbit.
+* History view per athlete: list of feedback entries.
+
+### 3.3 Workout Plans & Progress
+* Workout templates and weekly schedules; assign to one or more athletes.
+* Progress dashboard: shows scheduled vs. completed, weekly distance/time, adherence.
+* Simple filters: by week, athlete, plan.
+
+## 4. Out of Scope (Post‑MVP)
+* Live run monitoring (map and metrics in real time).
+* Push‑to‑talk audio during runs.
+* Adaptive training engines.
+
+## 5. Architecture & Tech Stack
+* Web app: Next.js 14, TypeScript, Tailwind CSS, Vercel hosting.
+* Backend: Supabase (Postgres, Auth, Storage) shared with RunningRabbit; RLS enforces coach/athlete access.
+* Auth: Supabase email/OAuth; athletes explicitly authorize coach connections.
+
+## 6. Data Model (Draft)
+* coaches (profile): id, name, contact, bio.
+* coach_athlete_links: id, coach_id, athlete_user_id, status (pending/active/revoked), created_at, updated_at.
+* workout_templates: id, coach_id, name, description, steps (JSON), tags.
+* workout_assignments: id, template_id, athlete_user_id, week_start, status.
+* feedback: id, coach_id, athlete_user_id, activity_id (optional), date, kind (text/audio), content_url/text, visibility.
+* audits: id, actor_id, action, entity, timestamp (security logging).
+
+## 7. Access Control & Security (RLS)
+* Separation strategy: single Supabase project; `profiles.role in ('athlete','coach')` plus `coach_athlete_links` controls visibility.
+* Coaches can read/write only their own templates, assignments, and feedback.
+* Coaches can read athlete progress for linked athletes only (status = active).
+* Athletes can read assignments and feedback addressed to them; cannot read other athletes.
+* Invite acceptance writes a link row; revocation sets status=revoked and immediately blocks coach access.
+* Secrets via environment variables; no secrets in frontend `NEXT_PUBLIC_*`.
+* Input validation and XSS sanitation for all text fields; audit key actions.
+
+### Acceptance Criteria (Separation)
+* Role-based: a coach cannot access data for athletes without an active link.
+* Athlete-only: an athlete cannot access coach-owned templates or other athletes’ data.
+* Revocation: changing a link to `revoked` blocks subsequent reads for the coach.
+* Audits: write an audit log row on invite, accept, revoke, assign, and feedback actions.
+
+## 8. APIs & Server Routes (Draft)
+* POST /api/coach/invite { athlete_email | athlete_id } → creates pending link.
+* POST /api/coach/revoke { link_id } → revokes.
+* GET /api/coach/athletes → roster with statuses and summary metrics.
+* POST /api/coach/workouts/templates → CRUD.
+* POST /api/coach/workouts/assign → assign template to athlete/week.
+* GET /api/coach/progress?athlete_id&week → scheduled vs. completed, aggregates.
+* POST /api/coach/feedback → create text/audio feedback linked to athlete (and optionally activity).
+
+## 9. UI (Coach App)
+* Dashboard: weekly overview, quick actions, alerts (pending invites, overdue feedback).
+* Athlete Roster: list with status, last run summary, quick link to profile.
+* Planner: calendar/week view to assign templates.
+* Feedback Composer: write notes or upload audio; link to activity.
+* Progress View: charts for adherence, distance, time, HR (where available).
+
+## 10. Integrations
+* Strava (read via athlete’s authorization in RunningRabbit): show summaries to coach for linked athletes; no new coach-side scopes.
+* Storage: Supabase Storage for audio feedback files.
+
+## 11. Testing
+* Unit: invites, revocations, template CRUD, assignment creation.
+* RLS tests: coach reads own data, blocked from others; athlete reads own.
+* E2E: invite → accept → assign → complete → feedback → progress renders.
+* Security tests: XSS in text fields; auth edge cases.
+
+## 12. Deployment & Ops
+* Monorepo recommended with separate Next.js apps for web (athlete) and coach.
+* Vercel projects per app; shared env and Supabase instance; preview deploys enabled.
+* Health endpoint `/healthz`.
+
+## 13. Privacy & Compliance
+* Minimal data collection; store only metrics needed for progress and planning.
+* Clear consent for coach links; revocation effective immediately.
+* Audio files considered sensitive; restrict access and lifecycle policies.
+
+## 14. MVP Checklist
+* [ ] Coach invites athlete; athlete accepts; link status transitions.
+* [ ] RLS policies enforce coach/athlete separation (roles + links).
+* [ ] Workout templates; weekly assignment; progress view.
+* [ ] Feedback composer; delivery to athlete app; history view.
+* [ ] Tests for invitations, RLS, planner, feedback.
+* [ ] Deploy coach app to runningrabbit.coach with CI.
+
+## 15. Roadmap (Post‑MVP)
+* [ ] Live monitoring and push‑to‑talk.
+* [ ] Adaptive workout adjustments.
+* [ ] Coach analytics (adherence trends, HR drift, pacing consistency).

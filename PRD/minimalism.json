@@ -1,0 +1,308 @@
+{
+  "version": "2.0",
+  "updated": "2025-11-11",
+  "spec_name": "Minimalism UI Design System",
+  "canonical_accent": {
+    "name": "neutral-black",
+    "hex": "#000000",
+    "tailwind": "black",
+    "usage": [
+      "primary buttons (monochrome)",
+      "CTA links (monochrome)",
+      "charts (grayscale only)",
+      "success/info states use neutrals"
+    ],
+    "description": "Monochrome variant removes accent colors and uses neutral/black CTAs"
+  },
+  "design_philosophy": {
+    "name": "Minimalism UI Design",
+    "core_principle": "Less is More",
+    "description": "A clean, functional interface that favors clarity over decoration.",
+    "influences": ["Bauhaus", "De Stijl", "Japanese Zen"]
+  },
+  "core_design_principles": {
+    "simplicity": {
+      "name": "Simplicity & Clarity",
+      "description": "Keep only necessary elements to create a functional and beautiful UI.",
+      "key_points": [
+        "Every element has a clear purpose",
+        "Remove unnecessary decoration",
+        "Reduce cognitive load",
+        "Enable quick understanding and interaction"
+      ]
+    },
+    "whitespace": {
+      "name": "Whitespace (Negative Space)",
+      "description": "Provide breathing room and guide visual flow.",
+      "key_points": [
+        "Whitespace can be any empty space",
+        "Enhances visual balance",
+        "Improves readability",
+        "Reduces clutter"
+      ]
+    },
+    "function_first": {
+      "name": "Function Over Form",
+      "description": "Prioritize utility over pure aesthetics.",
+      "key_points": [
+        "Support user journeys",
+        "Align with product goals",
+        "Aesthetics and function in harmony",
+        "Practicality comes first"
+      ]
+    }
+  },
+  "visual_characteristics": {
+    "design_style": {
+      "name": "Flat Design",
+      "description": "Avoid skeuomorphic textures and effects; use solid, 2D elements.",
+      "characteristics": [
+        "No gradients",
+        "No heavy shadows",
+        "No 3D effects",
+        "Simplified iconography",
+        "Clean, modern aesthetic"
+      ]
+    },
+    "color_palette": {
+      "primary_colors": {
+        "white": { "hex": "#FFFFFF", "meaning": "clean, pure, simple" },
+        "black": { "hex": "#000000", "meaning": "contrast, elegance" },
+        "gray": { "hex": "#808080", "meaning": "softness, depth, refinement" },
+        "beige_cream": { "hex": "#F5E6D3", "meaning": "warmth, softness" }
+      },
+      "accent_colors": {
+        "soft_gray": {
+          "hex": "#A9A9A9",
+          "meaning": "neutral, disabled",
+          "usage": "disabled buttons, secondary actions",
+          "status": "neutral"
+        }
+      },
+      "danger": { "hex": "#DC2626", "tailwind": "red-600" },
+      "disabled": { "hex": "#A9A9A9" },
+      "recommendation": "Use 1–3 base neutrals; CTAs use neutral/black (monochrome)"
+    },
+    "typography": {
+      "font_family": { "primary": "Inter", "fallbacks": ["system-ui", "Segoe UI", "Roboto"] },
+      "headings": { "weight": "600–700", "size_range_px": "24–48" },
+      "body": { "weight": "400", "size_range_px": "14–16", "line_height": "1.6–1.8" },
+      "small_text": { "weight": "400–500", "size_range_px": "12–13" },
+      "accessibility": { "contrast": "WCAG AA minimum", "avoid_ultralight_grays": true }
+    },
+    "visual_hierarchy": {
+      "methods": [
+        { "method": "size", "description": "Use larger size for important elements" },
+        { "method": "contrast", "description": "High-contrast color for primary actions" },
+        { "method": "spacing", "description": "Use spacing to separate and group" },
+        { "method": "color", "description": "Use accent to draw attention to CTAs" },
+        { "method": "weight", "description": "Bold for emphasis, regular for support" }
+      ]
+    },
+    "icon_design": {
+      "style": "Flat, linear or solid icons",
+      "characteristics": [
+        "Simple geometric shapes",
+        "Consistent stroke widths",
+        "Recognizable",
+        "Scalable SVGs",
+        "Mono or dual-tone"
+      ]
+    }
+  },
+  "layout_components": {
+    "grid_system": {
+      "description": "Organize content with a consistent grid.",
+      "spacing_baseline_px": 8,
+      "benefits": ["alignment", "consistent spacing", "responsive", "maintainable"]
+    },
+    "cards": {
+      "characteristics": [
+        "subtle border or soft background",
+        "clear content separation",
+        "adequate internal padding",
+        "optional soft shadow"
+      ],
+      "tailwind": "bg-white border border-gray-200 rounded-md p-4 shadow-sm"
+    },
+    "buttons": {
+      "primary": {
+        "background": "neutral black",
+        "text": "white",
+        "padding_px": "12–16",
+        "border_radius_px": "6–8",
+        "shadow": "none",
+        "tailwind": "bg-black text-white hover:opacity-90 disabled:opacity-60"
+      },
+      "primary_hero_variant": {
+        "background": "neutral black",
+        "text": "white",
+        "usage": "Optional hero CTA variant inspired by Easlo-style pages",
+        "tailwind": "bg-black text-white hover:opacity-90",
+        "status": "optional"
+      },
+      "secondary": {
+        "background": "light neutral",
+        "border": "1px solid",
+        "text": "dark text",
+        "padding_px": "12–16",
+        "border_radius_px": "6–8",
+        "tailwind": "bg-gray-200 text-gray-900 hover:bg-gray-300"
+      },
+      "danger": {
+        "background": "red-600",
+        "text": "white",
+        "tailwind": "bg-red-600 text-white hover:bg-red-700"
+      }
+    },
+    "navigation": {
+      "characteristics": ["simplified structure", "clear labels", "intuitive flow", "minimal items"],
+      "types": ["top bar", "sidebar", "bottom tabs (mobile)", "breadcrumbs"]
+    }
+  },
+  "tokens": {
+    "css": {
+      "color_primary": "#000000",
+      "color_bg": "#FFFFFF",
+      "color_text": "#111827",
+      "color_muted": "#374151",
+      "color_border": "#E5E7EB"
+    },
+    "tailwind_classes": {
+      "accent": ["bg-black", "text-white", "ring-gray-500"],
+      "cta_hero_optional": ["bg-black", "text-white"],
+      "neutrals": ["bg-gray-50", "bg-gray-200", "text-gray-700", "text-gray-900", "border-gray-200", "border-gray-300"],
+      "cards": ["bg-white", "border", "border-gray-200", "rounded-md", "p-4", "shadow-sm"],
+      "buttons_base": ["rounded-md", "px-3", "py-1.5", "text-sm"]
+    }
+  },
+  "charts": {
+    "line_bar": {
+      "income_series_hex": "#111827",
+      "expense_series_hex": "#6B7280",
+      "net_series_hex": "#9CA3AF",
+      "axes_labels_hex": "#9CA3AF"
+    },
+    "pie": {
+      "primary_slice_hex": "#111827",
+      "neutral_slice_hex": ["#374151", "#4B5563", "#6B7280", "#9CA3AF", "#D1D5DB", "#E5E7EB"]
+    }
+  },
+  "states_and_feedback": {
+    "success_info": { "text_tailwind": "text-gray-900" },
+    "error": { "text_tailwind": "text-red-600" },
+    "loading": { "guideline": "Use unobtrusive indicators; avoid dominant spinners." }
+  },
+  "accessibility": {
+    "touch_target_min_px": 44,
+    "focus_ring": { "tailwind": "ring-gray-500", "hex": "#6B7280" },
+    "alt_text_required": true,
+    "contrast_min": "WCAG AA"
+  },
+  "responsive_rules": {
+    "mobile_first": true,
+    "mobile": { "layout": "vertical stack", "containers": "w-full", "type": "readable sizes" },
+    "breakpoints": { "md": { "spacing": "increase", "type": "md:text-xl" } },
+    "avoid": ["hiding critical actions behind obscure menus on mobile"]
+  },
+  "style_alignment": {
+    "style_name": "Clean Product Pages",
+    "principles": [
+      "simplicity",
+      "clutter-free",
+      "short copy",
+      "ample whitespace",
+      "neutral surfaces with sparse accent"
+    ],
+    "cards": {
+      "prefer_shadow_free": true,
+      "tailwind": "bg-white border border-gray-200 rounded-md p-4"
+    },
+    "ctas": {
+      "use_canonical_green": false,
+      "allow_black_hero_variant": true
+    }
+  },
+  "landing_page": {
+    "hero": {
+      "aim_purpose": "One-sentence aim and purpose",
+      "supporting_line_max_chars": 120,
+      "primary_cta": ["bg-black text-white"],
+      "secondary_cta": ["bg-gray-200 text-gray-900", "text-gray-900 underline"]
+    },
+    "features_grid": {
+      "count_min": 4,
+      "count_max": 6,
+      "card_description_lines_max": 2
+    },
+    "post_auth_note": "Point users to dashboard after sign-in with concise copy"
+  },
+  "prompt_templates": {
+    "basic_description": "Minimalist UI, flat style, ample whitespace, limited neutral palette (white, gray, beige), clean sans-serif typography, simple geometric elements, clear hierarchy, function-first, no gradients/heavy shadows, intuitive navigation, content-focused.",
+    "detailed_description": "Modern minimalist interface: white and light gray base with no accent color (monochrome), generous negative space, Inter or similar sans-serif, flat icons, clean CTA buttons, grid layout, centered content, simplified navigation, task-focused.",
+    "minimalist_dashboard": "Minimalist dashboard: white background, gray text, monochrome charts (no accent), flat icons, clear grid, ample whitespace, simple KPI cards, no complex visuals, strong info hierarchy, easy scan/read.",
+    "mobile_minimalist": "Minimalist mobile app: white and light gray, no accent color, large tap targets (≥44×44px), generous vertical spacing, simple bottom navigation, flat design, content-first, fast loading."
+  },
+  "dos_and_donts": {
+    "dos": [
+      "Use ample whitespace",
+      "Keep palette limited (3–5 colors)",
+      "Use clean sans-serif fonts",
+      "Prioritize function",
+      "Build clear visual hierarchy",
+      "Maintain consistent spacing and alignment",
+      "Test readability and accessibility",
+      "Use mono or dual-tone icons"
+    ],
+    "donts": [
+      "Avoid excessive colors",
+      "Avoid complex textures/effects",
+      "Avoid too many font families (>2)",
+      "Avoid heavy shadows/gradients/3D",
+      "Avoid cramped layouts",
+      "Avoid unnecessary animation",
+      "Avoid low-contrast text",
+      "Avoid confusing navigation"
+    ]
+  },
+  "implementation_checklist": {
+    "color": [
+      "Choose base neutrals (white, light gray)",
+      "Choose secondary neutrals (dark gray)",
+      "Use neutral/black CTAs (monochrome)",
+      "Verify contrast meets WCAG"
+    ],
+    "typography": [
+      "Select 1–2 sans-serif families",
+      "Define heading/body/small sizes",
+      "Set appropriate line-height and letter-spacing",
+      "Test readability"
+    ],
+    "layout": [
+      "Establish 8px grid baseline",
+      "Define spacing rules",
+      "Design core components (buttons, cards, forms)",
+      "Validate responsive behavior"
+    ],
+    "icons": [
+      "Establish consistent icon style",
+      "Use SVG",
+      "Define icon sizes",
+      "Ensure clarity and recognizability"
+    ],
+    "accessibility": [
+      "Validate contrasts",
+      "Ensure tap targets ≥44×44px",
+      "Provide alt text",
+      "Test keyboard navigation"
+    ]
+  },
+  "normalization": {
+    "map_legacy_accents_to_canonical": false,
+    "mapping": {},
+    "override": {
+      "key": "brand.overrideAccentHex",
+      "description": "If set, use a brand accent instead of monochrome (discouraged)."
+    }
+  }
+}

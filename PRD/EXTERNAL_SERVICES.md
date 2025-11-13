@@ -38,11 +38,10 @@ This document lists all external services currently used by the MVP and optional
 ## Planned (Post-MVP)
 
 - Supabase (Database + Auth + Storage)
-  - Purpose: Persist routes, manage private shares, enforce RLS.
-  - Status: Not integrated yet. When approved, we will add:
-    - Environment variables: `SUPABASE_URL`, `SUPABASE_ANON_KEY` (frontend), and service role keys only in server-side contexts.
-    - RLS policies for per-user access to routes and shares.
-    - Tests for unauthorized access and edge cases.
+  - Purpose: Persist routes, manage private shares, enforce RLS; shared across RunningRabbit (athlete) and RunningRabbit Coach.
+  - Separation Strategy: Single Supabase project; `profiles.role in ('athlete','coach')` and `coach_athlete_links` gate cross-party reads. RLS blocks access when link status != active.
+  - Environment Variables: `SUPABASE_URL`, `SUPABASE_ANON_KEY` for frontend; service-role keys only in server contexts. Never commit secrets.
+  - Tests: Unauthorized access, role separation, invite/accept/revoke flows. Include audit log checks.
 
 ## Compliance & Security Checklist
 
