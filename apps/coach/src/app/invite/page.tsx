@@ -1,12 +1,14 @@
-'use client';
-
+"use client";
 import { MinimalismContainer, MinimalismCard, MinimalismButton, MinimalismInput } from '@/components/ui';
 import { useState } from 'react';
+import { AuthGate } from '@/components/auth-gate';
+import { useAuth } from '@/contexts/auth-context';
 
 export default function InviteAthletePage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const { user } = useAuth();
 
   const handleInvite = async () => {
     if (!email) return;
@@ -15,7 +17,7 @@ export default function InviteAthletePage() {
     try {
       const res = await fetch('/api/coach/invite', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-coach-id': user?.id || '' },
         body: JSON.stringify({ athlete_email: email }),
       });
       const json = await res.json();
@@ -33,6 +35,7 @@ export default function InviteAthletePage() {
   };
 
   return (
+    <AuthGate>
     <MinimalismContainer>
       <div className="py-8">
         <h1 className="text-2xl font-bold text-gray-900">Invite Athlete</h1>
@@ -60,5 +63,6 @@ export default function InviteAthletePage() {
         </div>
       </MinimalismCard>
     </MinimalismContainer>
+    </AuthGate>
   );
 }

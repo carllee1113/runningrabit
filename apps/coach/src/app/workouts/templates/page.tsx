@@ -1,13 +1,15 @@
-'use client';
-
+"use client";
 import { MinimalismContainer, MinimalismCard, MinimalismButton, MinimalismInput } from '@/components/ui';
 import { useState } from 'react';
+import { AuthGate } from '@/components/auth-gate';
+import { useAuth } from '@/contexts/auth-context';
 
 export default function WorkoutTemplatesPage() {
   const [templates, setTemplates] = useState<any[]>([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   const handleCreate = async () => {
     if (!name) return;
@@ -15,7 +17,7 @@ export default function WorkoutTemplatesPage() {
     try {
       const res = await fetch('/api/coach/workouts/templates', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-coach-id': user?.id || '' },
         body: JSON.stringify({ name, description, steps: [] }),
       });
       const json = await res.json();
@@ -32,6 +34,7 @@ export default function WorkoutTemplatesPage() {
   };
 
   return (
+    <AuthGate>
     <MinimalismContainer>
       <div className="py-8">
         <h1 className="text-2xl font-bold text-gray-900">Workout Templates</h1>
@@ -71,5 +74,6 @@ export default function WorkoutTemplatesPage() {
         ))}
       </div>
     </MinimalismContainer>
+    </AuthGate>
   );
 }

@@ -9,8 +9,14 @@ const supabase = createClient(
 
 export async function GET(req: NextRequest) {
   try {
-    // TODO: Get coach ID from auth session
-    const coachId = '00000000-0000-0000-0000-000000000000';
+    const coachId = req.headers.get('x-coach-id') || '';
+    if (!coachId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const { data: coachProfile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('user_id', coachId)
+      .single();
+    if (!coachProfile || coachProfile.role !== 'coach') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
     const { data: links, error } = await supabase
       .from('coach_athlete_links')

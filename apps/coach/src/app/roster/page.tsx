@@ -1,7 +1,8 @@
-'use client';
-
+"use client";
 import { MinimalismContainer, MinimalismCard } from '@/components/ui';
 import { useEffect, useState } from 'react';
+import { AuthGate } from '@/components/auth-gate';
+import { useAuth } from '@/contexts/auth-context';
 
 interface Athlete {
   link_id: string;
@@ -14,9 +15,10 @@ interface Athlete {
 export default function RosterPage() {
   const [athletes, setAthletes] = useState<Athlete[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
-    fetch('/api/coach/athletes')
+    fetch('/api/coach/athletes', { headers: { 'x-coach-id': user?.id || '' } })
       .then((res) => res.json())
       .then((json) => {
         setAthletes(json.athletes || []);
@@ -26,6 +28,7 @@ export default function RosterPage() {
   }, []);
 
   return (
+    <AuthGate>
     <MinimalismContainer>
       <div className="py-8">
         <h1 className="text-2xl font-bold text-gray-900">Athlete Roster</h1>
@@ -62,5 +65,6 @@ export default function RosterPage() {
         )}
       </MinimalismCard>
     </MinimalismContainer>
+    </AuthGate>
   );
 }

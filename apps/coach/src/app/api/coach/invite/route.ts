@@ -27,8 +27,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Athlete not found' }, { status: 404 });
     }
 
-    // Get coach ID from auth (simplified - in real app get from session)
-    const coachId = '00000000-0000-0000-0000-000000000000'; // TODO: Get from auth
+    const coachId = req.headers.get('x-coach-id') || '';
+    if (!coachId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+    const { data: coachProfile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('user_id', coachId)
+      .single();
+    if (!coachProfile || coachProfile.role !== 'coach') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
     // Check if link already exists
     const { data: existingLink } = await supabase

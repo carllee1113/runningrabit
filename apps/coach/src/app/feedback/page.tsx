@@ -1,12 +1,14 @@
-'use client';
-
+"use client";
 import { MinimalismContainer, MinimalismCard, MinimalismButton, MinimalismInput } from '@/components/ui';
 import { useState } from 'react';
+import { AuthGate } from '@/components/auth-gate';
+import { useAuth } from '@/contexts/auth-context';
 
 export default function FeedbackPage() {
   const [athleteId, setAthleteId] = useState('');
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   const handleSubmit = async () => {
     if (!athleteId || !content) return;
@@ -14,7 +16,7 @@ export default function FeedbackPage() {
     try {
       const res = await fetch('/api/coach/feedback', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-coach-id': user?.id || '' },
         body: JSON.stringify({
           athlete_user_id: athleteId,
           date: new Date().toISOString().slice(0, 10),
@@ -34,6 +36,7 @@ export default function FeedbackPage() {
   };
 
   return (
+    <AuthGate>
     <MinimalismContainer>
       <div className="py-8">
         <h1 className="text-2xl font-bold text-gray-900">Post Feedback</h1>
@@ -66,5 +69,6 @@ export default function FeedbackPage() {
         </div>
       </MinimalismCard>
     </MinimalismContainer>
+    </AuthGate>
   );
 }

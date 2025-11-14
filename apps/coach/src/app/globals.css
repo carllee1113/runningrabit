@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Force light mode and ensure text visibility */
 :root {
@@ -91,3 +89,5 @@ a {
 a:hover {
   color: #1d4ed8 !important;
 }
+
+/* Component-level classes should use utilities directly in markup */

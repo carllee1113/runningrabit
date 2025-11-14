@@ -1,12 +1,13 @@
-'use client';
-
+"use client";
 import { MinimalismContainer, MinimalismCard, MinimalismButton } from '@/components/ui';
 import { useRouter } from 'next/navigation';
+import { AuthGate } from '@/components/auth-gate';
 
 export default function DashboardPage() {
   const router = useRouter();
   
   return (
+    <AuthGate>
     <MinimalismContainer>
       <div className="py-8">
         <h1 className="text-2xl font-bold text-gray-900">Coach Dashboard</h1>
@@ -39,5 +40,6 @@ export default function DashboardPage() {
         </MinimalismCard>
       </div>
     </MinimalismContainer>
+    </AuthGate>
   );
 }
